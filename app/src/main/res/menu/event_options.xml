@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/invite_EventMenu"
+        android:title="Invite Guests"
+        app:showAsAction="never"/>
+    <item android:id="@+id/shareEvent_EventMenu"
+        android:title="Share event"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/share"/>
+    <item android:id="@+id/seeGuest_EventMenu"
+        android:title="See Guest List"
+        app:showAsAction="never" />
+    <item android:id="@+id/update_EventMenu"
+        android:title="Edit Events"
+        android:icon="@drawable/edit"
+        android:iconTint="@color/TextColor_Primary"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/delete_EventMenu"
+        android:title="Delete Events"
+        android:icon="@drawable/delete_account_icon"
+        app:showAsAction="ifRoom" />
+</menu>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "387317612675",
+    "firebase_url": "https://squadpartyeventplanner.firebaseio.com",
+    "project_id": "squadpartyeventplanner",
+    "storage_bucket": "squadpartyeventplanner.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:387317612675:android:960f671915f82fd4e01bb6",
+        "android_client_info": {
+          "package_name": "com.example.squadpartyplannerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "387317612675-idnirkeicoouj38fvdq28vn6tr7l6l21.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.squadpartyplannerapp",
+            "certificate_hash": "825ea9d1eba3f726050c616e5e586bb33360a27c"
+          }
+        },
+        {
+          "client_id": "387317612675-m8dt20avcs5uuc5f5jettf1ulafhfian.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6lZghKREE1DE0vYFBPiB-8dvP2OUJk1s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "387317612675-m8dt20avcs5uuc5f5jettf1ulafhfian.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

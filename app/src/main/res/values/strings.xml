@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">SquadPartyPlannerApp</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_email_id">Enter Email ID</string>
+    <string name="enter_password">Enter Password</string>
+
+    <style name="additional_feature_text"></style>
+
+    <string name="default_notification_channel_id">MeetSpace_CH_1</string>
+</resources>
