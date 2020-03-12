@@ -11,16 +11,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-   <!-- <View
-        android:id="@+id/profile_pic_bg_edit"
-        android:layout_width="200sp"
-        android:layout_height="200sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@android:color/white"
-        android:alpha="0.6"
-        android:layout_marginTop="30dp"/>-->
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_pic_edit"
         android:layout_width="180dp"
@@ -30,12 +20,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:src="@drawable/user"
-
         app:civ_border_width="2dp"
         app:civ_border_color="@color/TextColor_Primary"/>
-
-
-
     <LinearLayout
         android:id="@+id/edit_field_l1"
         android:layout_width="match_parent"
@@ -126,10 +112,7 @@
             android:background="@drawable/text_path_bg"
             android:layout_margin="15dp"
             android:elevation="10sp"/>
-
-
     </LinearLayout>
-
     <Button
         android:id="@+id/update_profile_btn"
         android:layout_width="match_parent"
@@ -146,7 +129,6 @@
         app:layout_constraintTop_toBottomOf="@id/edit_field_l1"
         app:layout_constraintBottom_toBottomOf="parent"
         android:background="@android:color/white"/>
-
     <ProgressBar
         android:id="@+id/progrerss_editProfile"
         android:layout_width="match_parent"
@@ -159,6 +141,5 @@
         android:minWidth="60dp"
         android:minHeight="60dp"
         android:visibility="gone"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

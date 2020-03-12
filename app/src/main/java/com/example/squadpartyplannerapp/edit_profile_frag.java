@@ -402,8 +402,67 @@ public class edit_profile_frag extends Fragment implements View.OnClickListener{
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
+        inflater.inflate(R.menu.edit_profile_menu,menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.delete_account_editprofile:
+                deleteAccount();
+                //Toast.makeText(this,"Delete Account",Toast.LENGTH_LONG).show();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
+    private void deleteAccount() {
+        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference databaseReference = database.getReference("User");
+        final String uid = firebaseUser.getUid();
+        final String email = firebaseUser.getEmail();
+        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+        final StorageReference storageReference = firebaseStorage.getReference();
+        final StorageReference profilepicRef = storageReference.child("/ProfilePictures/"+email);
+        final StorageReference eventPicRef = storageReference.child("/Events/"+uid);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Delete Account");
+        builder.setMessage("Are you sure you want to delete acccount ? Once You delete your account, you will not be able to access your data again.")
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
 
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //your deleting code
+                        //dialog.dismiss();
+                        firebaseUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful())
+                                {
+                                    databaseReference.child(uid).removeValue();
+                                    Intent i = new Intent(context,Main2Activity.class);
+                                    startActivity(i);
+                                    getActivity().finish();
+
+                                }
+                                else
+                                {
+                                    Toast.makeText(context,"Error:"+task.getException(),Toast.LENGTH_LONG).show();
+                                }
+
+                            }
+                        });
+                    }
+
+                })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+
+                    }
+                });
+        builder.show();
+    }
 }

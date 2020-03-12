@@ -54,8 +54,8 @@ public class UpcomingEventDetails extends Fragment {
     ProgressBar progressBar;
     Context context;
     ImageView eventImage;
-    TextView eventName, eventStartDate,eventEndDate, eventStartTime, eventEndTime, eventPlace, eventType, eventInstruction, eventExtras, eventNoOfGuest, eventHostID;
-    String ID,HostID, EventImage, EventName, EventStartDate,EventEndDate, EventStartTime, EventEndTime, EventPlace, EventType, EventInstruction, NoOfGuest, Extras,TAG;
+    TextView eventName, eventStartDate, eventEndDate, eventStartTime, eventEndTime, eventPlace, eventType, eventInstruction, eventExtras, eventNoOfGuest, eventHostID;
+    String ID, HostID, EventImage, EventName, EventStartDate, EventEndDate, EventStartTime, EventEndTime, EventPlace, EventType, EventInstruction, NoOfGuest, Extras, TAG;
     Uri imageURI;
     Bundle bundle;
     String Imageextention;
@@ -84,7 +84,7 @@ public class UpcomingEventDetails extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        eventData = getActivity().getSharedPreferences("EventInfo",Context.MODE_PRIVATE);
+        eventData = getActivity().getSharedPreferences("EventInfo", Context.MODE_PRIVATE);
         bundle = new Bundle();
         this.view = view;
         context = getActivity().getApplicationContext();
@@ -102,20 +102,20 @@ public class UpcomingEventDetails extends Fragment {
         eventNoOfGuest = view.findViewById(R.id.eventNoGuest_upcomingDetails);
         eventHostID = view.findViewById(R.id.eventHostID_upcomingDetails);
 
-        ID = eventData.getString("event__ID","");
-        HostID = eventData.getString("host__ID","");
-        EventImage = eventData.getString("event__Image","");
-        EventName = eventData.getString("event__Name","");
-        EventStartDate = eventData.getString("event__StartDate","");
-        EventEndDate = eventData.getString("event__EndDate","");
-        EventStartTime = eventData.getString("event__StartTime","");
-        EventEndTime = eventData.getString("event__EndTime","");
-        EventPlace = eventData.getString("event__Place","");
-        EventType = eventData.getString("event__Type","");
-        EventInstruction = eventData.getString("event__Instruction","");
-        NoOfGuest = eventData.getString("noOf__Guest","");
-        Extras = eventData.getString("__extras","");
-        TAG = eventData.getString("TAG","");
+        ID = eventData.getString("event__ID", "");
+        HostID = eventData.getString("host__ID", "");
+        EventImage = eventData.getString("event__Image", "");
+        EventName = eventData.getString("event__Name", "");
+        EventStartDate = eventData.getString("event__StartDate", "");
+        EventEndDate = eventData.getString("event__EndDate", "");
+        EventStartTime = eventData.getString("event__StartTime", "");
+        EventEndTime = eventData.getString("event__EndTime", "");
+        EventPlace = eventData.getString("event__Place", "");
+        EventType = eventData.getString("event__Type", "");
+        EventInstruction = eventData.getString("event__Instruction", "");
+        NoOfGuest = eventData.getString("noOf__Guest", "");
+        Extras = eventData.getString("__extras", "");
+        TAG = eventData.getString("TAG", "");
 
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(EventName);
@@ -151,12 +151,9 @@ public class UpcomingEventDetails extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        if(TAG.contentEquals("Accepted_Event"))
-        {
+        if (TAG.contentEquals("Accepted_Event")) {
             menu.clear();
-        }
-        else
-        {
+        } else {
             menu.clear();
             inflater.inflate(R.menu.event_options, menu);
         }
@@ -168,16 +165,16 @@ public class UpcomingEventDetails extends Fragment {
         switch (item.getItemId()) {
             case R.id.invite_EventMenu:
 
-                bundle.putString("event_ID",ID);
-                bundle.putString("host_ID",HostID);
-                bundle.putString("event_Name",EventName);
-                bundle.putString("event_Start_Date",EventStartDate);
-                bundle.putString("event_End_Date",EventEndDate);
-                bundle.putString("event_StartTime",EventStartTime);
-                bundle.putString("event_EndTime",EventEndTime);
-                bundle.putString("event_Place",EventPlace);
+                bundle.putString("event_ID", ID);
+                bundle.putString("host_ID", HostID);
+                bundle.putString("event_Name", EventName);
+                bundle.putString("event_Start_Date", EventStartDate);
+                bundle.putString("event_End_Date", EventEndDate);
+                bundle.putString("event_StartTime", EventStartTime);
+                bundle.putString("event_EndTime", EventEndTime);
+                bundle.putString("event_Place", EventPlace);
 
-                Navigation.findNavController(view).navigate(R.id.action_upcomingEventDetails_to_inviteUser,bundle);
+                Navigation.findNavController(view).navigate(R.id.action_upcomingEventDetails_to_inviteUser, bundle);
                 //Toast.makeText(context, "Invite Guests Clicked!", Toast.LENGTH_LONG).show();
                 break;
             case R.id.shareEvent_EventMenu:
@@ -200,36 +197,40 @@ public class UpcomingEventDetails extends Fragment {
 
     }
 
-    private void  getEventMessageFromDB() {
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference("Invitations");
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+    private void getEventMessageFromDB() {
+
+        Handler uiHandler = new Handler(Looper.getMainLooper());
+        uiHandler.post(new Runnable() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists())
-                {
-                    for(DataSnapshot ds : dataSnapshot.getChildren())
-                    {
-                        if(ds.getKey().contentEquals(ID)) {
-                            for (DataSnapshot ds1 : ds.getChildren()) {
-                                Message = ds1.child("Invitation_Message").getValue().toString();
-                                Intent i = new Intent(Intent.ACTION_SEND);
-                                i.setType("text/plain");
-                                i.putExtra(Intent.EXTRA_TEXT,Message);
-                                i.putExtra(Intent.EXTRA_SUBJECT,"Invitation");
-                                startActivity(Intent.createChooser(i,"Send Email"));
+            public void run() {
+                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                DatabaseReference databaseReference = firebaseDatabase.getReference("Invitations");
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                                if (ds.getKey().contentEquals(ID)) {
+                                    for (DataSnapshot ds1 : ds.getChildren()) {
+                                        Message = ds1.child("Invitation_Message").getValue().toString();
+                                        Intent i = new Intent(Intent.ACTION_SEND);
+                                        i.setType("text/plain");
+                                        i.putExtra(Intent.EXTRA_TEXT, Message);
+                                        i.putExtra(Intent.EXTRA_SUBJECT, "Invitation");
+                                        startActivity(Intent.createChooser(i, "Send Email"));
+                                    }
+                                }
                             }
+                        } else {
+                            Toast.makeText(context, "For Share this Event you need to Invite atleast one person.", Toast.LENGTH_LONG).show();
                         }
                     }
-                }
-                else {
-                    Toast.makeText(context,"For Share this Event you need to Invite atleast one person.",Toast.LENGTH_LONG).show();
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(context,databaseError.getMessage(),Toast.LENGTH_LONG).show();
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(context, databaseError.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
     }
@@ -290,7 +291,7 @@ public class UpcomingEventDetails extends Fragment {
 
                                             /*FragmentManager fragmentManager = getParentFragmentManager();
                                             fragmentManager.popBackStack();*/
-                                            Intent i = new Intent(context,Main3Activity.class);
+                                            Intent i = new Intent(context, Main3Activity.class);
                                             startActivity(i);
                                             getActivity().finish();
                                             Toast.makeText(context, "Event Successfully Deleted!", Toast.LENGTH_LONG).show();
@@ -328,7 +329,7 @@ public class UpcomingEventDetails extends Fragment {
         i.putExtra("eventImage", EventImage);
         i.putExtra("eventName", EventName);
         i.putExtra("eventStartDate", EventStartDate);
-        i.putExtra("eventEndDate",EventEndDate);
+        i.putExtra("eventEndDate", EventEndDate);
         i.putExtra("eventStartTime", EventStartTime);
         i.putExtra("eventEndTime", EventEndTime);
         i.putExtra("eventPlace", EventPlace);

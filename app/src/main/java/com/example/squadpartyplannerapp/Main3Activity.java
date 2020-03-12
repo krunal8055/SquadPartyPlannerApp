@@ -77,7 +77,7 @@ public class Main3Activity extends AppCompatActivity implements NavigationView.O
         setDataInNavDrawer();
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
-        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         HomeDrawerLayout = findViewById(R.id.nav_drawer);
@@ -156,16 +156,7 @@ public class Main3Activity extends AppCompatActivity implements NavigationView.O
                 }
             }
         });
-
     }
-   /* private void DeleteToken() {
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseUser = firebaseAuth.getCurrentUser();
-        String uid = firebaseUser.getUid();
-        databaseReference.child(uid).child("Tokenid").removeValue();
-    }*/
-
-
     @Override
     public boolean onSupportNavigateUp() {
         return NavigationUI.navigateUp(Navigation.findNavController(this, R.id.nav_home_host_fragment),HomeDrawerLayout) || super.onSupportNavigateUp();
@@ -201,14 +192,11 @@ public class Main3Activity extends AppCompatActivity implements NavigationView.O
                 navController.navigate(R.id.action_home_frag_to_about_us_frag);
                 //Toast.makeText(this,"About us",Toast.LENGTH_LONG).show();
                 break;
-            case R.id.delete_account_nav_draw:
+           /* case R.id.delete_account_nav_draw:
                 deleteAccount();
                 //Toast.makeText(this,"Delete Account",Toast.LENGTH_LONG).show();
-                break;
+                break;*/
             case R.id.log_out_nav_draw:
-                //Toast.makeText(this,"logout",Toast.LENGTH_LONG).show();
-
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Log out");
                 builder.setMessage("Are you sure you want to logout your acccount ?")
@@ -216,7 +204,6 @@ public class Main3Activity extends AppCompatActivity implements NavigationView.O
 
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 //your deleting code
-
                                 //DeleteToken();
                                 FirebaseAuth.getInstance().signOut();
                                 Intent intent_signout = new Intent(Main3Activity.this, Main2Activity.class);
@@ -228,9 +215,7 @@ public class Main3Activity extends AppCompatActivity implements NavigationView.O
                         })
                         .setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-
                                 dialog.dismiss();
-
                             }
                         });
                 builder.show();
@@ -242,7 +227,6 @@ public class Main3Activity extends AppCompatActivity implements NavigationView.O
     }
 
     private void deleteAccount() {
-
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference databaseReference = database.getReference("User");

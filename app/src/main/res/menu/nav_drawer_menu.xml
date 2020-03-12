@@ -15,10 +15,10 @@
             android:id="@+id/about_us_nav_draw"
             android:icon="@drawable/about_us_icon"
             android:title="About us"/>
-        <item
+      <!--  <item
             android:id="@+id/delete_account_nav_draw"
             android:icon="@drawable/delete_account_icon"
-            android:title="Delete Account"/>
+            android:title="Delete Account"/>-->
         <item
             android:id="@+id/log_out_nav_draw"
             android:icon="@drawable/logout_icon"
